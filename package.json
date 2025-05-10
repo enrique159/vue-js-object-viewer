@@ -1,0 +1,35 @@
+{
+  "name": "vue-js-object-viewer",
+  "version": "1.0.2",
+  "main": "./dist/vue-js-object-viewer.umd.js",
+  "module": "./dist/vue-js-object-viewer.es.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [
+    "vue",
+    "object",
+    "viewer",
+    "json",
+    "viewer",
+    "vue component"
+  ],
+  "author": "Enrique Marín Hirales",
+  "license": "MIT",
+  "description": "Vue component to view objects",
+  "peerDependencies": {
+    "vue": "^3.5.13"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.10"
+  }
+}
