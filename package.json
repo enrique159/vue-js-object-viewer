@@ -1,6 +1,6 @@
 {
   "name": "vue-js-object-viewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/vue-js-object-viewer.umd.js",
   "module": "./dist/vue-js-object-viewer.es.js",
   "files": [
@@ -20,6 +20,13 @@
   "author": "Enrique Marín Hirales",
   "license": "MIT",
   "description": "Vue component to view objects",
+  "bugs": {
+    "url": "https://github.com/enrique159/vue-js-object-viewer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enrique159/vue-js-object-viewer.git"
+  },
   "peerDependencies": {
     "vue": "^3.5.13"
   },
