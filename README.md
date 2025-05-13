@@ -1,3 +1,5 @@
+![Vue JS Object Viewer](https://github.com/enrique159/vue-js-object-viewer/blob/main/example.png?raw=true)
+
 # Vue JS Object Viewer
 
 A Vue 3 component to interactively visualize JavaScript objects, similar to browser developer tools.
