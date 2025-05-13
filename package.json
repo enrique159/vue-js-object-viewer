@@ -1,6 +1,6 @@
 {
   "name": "vue-js-object-viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/vue-js-object-viewer.umd.js",
   "module": "./dist/vue-js-object-viewer.es.js",
   "files": [

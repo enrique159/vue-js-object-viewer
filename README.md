@@ -2,6 +2,8 @@
 
 A Vue 3 component to interactively visualize JavaScript objects, similar to browser developer tools.
 
+[GitHub Repository](https://github.com/enrique159/vue-js-object-viewer)
+
 [![NPM Version](https://img.shields.io/npm/v/vue-js-object-viewer.svg)](https://www.npmjs.com/package/vue-js-object-viewer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -10,6 +12,8 @@ A Vue 3 component to interactively visualize JavaScript objects, similar to brow
 - 🔍 Interactive visualization of JavaScript objects and arrays
 - 🌳 Support for nested data structures
 - 🎨 Syntax highlighting for different data types
+- 🎭 Multiple themes: light, dark, and monokai
+- 🖌️ Fully customizable colors
 - 📦 No external dependencies
 - 🔄 Expand/collapse nodes for better navigation
 - 💻 Style similar to browser developer tools
@@ -77,6 +81,8 @@ const myObject = ref({
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
 | data | Any | Yes | The data to visualize. Can be any JavaScript data type (object, array, string, number, etc.) |
+| theme | String | No | The color theme to use. Options: `'light'` (default), `'dark'`, or `'monokai'` |
+| colors | Object | No | Custom colors object to override the default theme colors. See [Color Customization](#color-customization) section below |
 
 ## Examples
 
@@ -129,7 +135,56 @@ const myObject = ref({
 
 ## Customization
 
-The component comes with predefined styles that resemble browser developer tools. These styles are encapsulated with `scoped` to avoid conflicts with other styles in your application.
+### Themes
+
+The component supports three built-in themes:
+
+- `light` (default): Light theme with blue keys and colored values
+- `dark`: Dark theme optimized for dark backgrounds
+- `monokai`: Monokai-inspired theme with vibrant colors
+
+```vue
+<!-- Using the dark theme -->
+<VueJsObjectViewer :data="myObject" theme="dark" />
+
+<!-- Using the monokai theme -->
+<VueJsObjectViewer :data="myObject" theme="monokai" />
+```
+
+### Color Customization
+
+You can completely customize the colors by providing a `colors` object with the following properties:
+
+```vue
+<template>
+  <VueJsObjectViewer :data="myObject" :colors="customColors" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import VueJsObjectViewer from 'vue-js-object-viewer'
+
+const myObject = ref({ /* ... */ })
+
+const customColors = {
+  undefined: '#6b7280',  // Color for undefined values
+  null: '#6b7280',       // Color for null values
+  string: '#10b981',     // Color for string values
+  number: '#0ea5e9',     // Color for number values
+  boolean: '#f59e0b',    // Color for boolean values
+  function: '#a855f7',   // Color for function values
+  key: '#3b82f6',        // Color for property keys
+  expandIcon: '#3b82f6', // Color for expand/collapse icons
+  background: 'transparent', // Background color
+  hover: '#0000001a',    // Background color on hover
+  border: '#5b5b5b36',   // Border color
+  summary: '#666',       // Color for object summary text
+  default: '#333'        // Default text color
+}
+</script>
+```
+
+The `colors` prop takes precedence over the `theme` prop if both are provided.
 
 ## Contributing
 

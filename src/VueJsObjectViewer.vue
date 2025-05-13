@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Colors {
   undefined: string
@@ -47,14 +47,89 @@ interface Colors {
   number: string
   boolean: string
   function: string
+  key: string
+  expandIcon: string
+  background: string
+  hover: string
+  border: string
+  summary: string
+  default: string
 }
 
-defineProps<{
+type Theme = 'light' | 'dark' | 'monokai'
+
+const props = defineProps<{
   data: any
   colors?: Colors
+  theme?: Theme
 }>()
 
 const expandedKeys = ref<string[]>([])
+
+const themeColors = computed<Colors>(() => {
+  // Default light theme colors
+  const lightTheme: Colors = {
+    undefined: '#6b7280',
+    null: '#6b7280',
+    string: '#10b981',
+    number: '#0ea5e9',
+    boolean: '#f59e0b',
+    function: '#a855f7',
+    key: '#3b82f6',
+    expandIcon: '#3b82f6',
+    background: 'transparent',
+    hover: '#0000001a',
+    border: '#5b5b5b36',
+    summary: '#666',
+    default: '#333'
+  }
+
+  // Dark theme colors
+  const darkTheme: Colors = {
+    undefined: '#9ca3af',
+    null: '#9ca3af',
+    string: '#34d399',
+    number: '#38bdf8',
+    boolean: '#fbbf24',
+    function: '#c084fc',
+    key: '#60a5fa',
+    expandIcon: '#60a5fa',
+    background: 'transparent',
+    hover: '#ffffff1a',
+    border: '#9ca3af36',
+    summary: '#9ca3af',
+    default: '#e5e7eb'
+  }
+
+  // Monokai theme colors
+  const monokaiTheme: Colors = {
+    undefined: '#75715e',
+    null: '#75715e',
+    string: '#a6e22e',
+    number: '#ae81ff',
+    boolean: '#fd971f',
+    function: '#66d9ef',
+    key: '#f92672',
+    expandIcon: '#75715e',
+    background: 'transparent',
+    hover: 'rgba(150, 150, 150, 0.15)',
+    border: 'rgba(117, 113, 94, 0.4)',
+    summary: '#75715e',
+    default: '#75715e'
+  }
+
+  if (props.colors) return props.colors
+
+  switch (props.theme) {
+    case 'dark':
+      return darkTheme
+    case 'monokai':
+      return monokaiTheme
+    case 'light':
+    default:
+      return lightTheme
+  }
+})
 
 const toggleExpand = (key: string) => {
   const index = expandedKeys.value.indexOf(key)
@@ -116,8 +191,8 @@ const getEntries = (obj: any) => {
   font-family: monospace;
   font-size: 0.9rem;
   line-height: 1.4;
-  color: #333;
-  background-color: transparent;
+  color: v-bind('themeColors.default');
+  background-color: v-bind('themeColors.background');
 }
 
 .property-item {
@@ -133,7 +208,7 @@ const getEntries = (obj: any) => {
 }
 
 .property-header:hover {
-  background-color: #f0f0f0;
+  background-color: v-bind('themeColors.hover');
 }
 
 .expand-icon {
@@ -143,7 +218,7 @@ const getEntries = (obj: any) => {
 }
 
 .expanded, .collapsed {
-  color: #3b82f6; /* primary color */
+  color: v-bind('themeColors.expandIcon');
 }
 
 .spacer {
@@ -152,7 +227,7 @@ const getEntries = (obj: any) => {
 }
 
 .property-key {
-  color: #3b82f6; /* primary color */
+  color: v-bind('themeColors.key');
   font-weight: 500;
 }
 
@@ -162,37 +237,37 @@ const getEntries = (obj: any) => {
 
 .object-summary {
   margin-left: 0.25rem;
-  color: #666;
+  color: v-bind('themeColors.summary');
   opacity: 0.7;
 }
 
 .nested-object {
   padding-left: 1.5rem;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid v-bind('themeColors.border');
 }
 
 /* Value type styles */
 .undefined-value, .null-value {
-  color: #6b7280; /* gray-500 */
+  color: v-bind('themeColors.undefined');
 }
 
 .string-value {
-  color: #10b981; /* success/green */
+  color: v-bind('themeColors.string');
 }
 
 .number-value {
-  color: #0ea5e9; /* info/blue */
+  color: v-bind('themeColors.number');
 }
 
 .boolean-value {
-  color: #f59e0b; /* warning/amber */
+  color: v-bind('themeColors.boolean');
 }
 
 .function-value {
-  color: #a855f7; /* secondary/purple */
+  color: v-bind('themeColors.function');
 }
 
 .default-value {
-  color: #333; /* base text color */
+  color: v-bind('themeColors.default');
 }
 </style>
